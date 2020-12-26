@@ -13,7 +13,7 @@
 
 TensorBoard log dir inside container is at `/app/.tensorboard`.
 
-## Running Python App from VS Code
+## Running Python from VS Code
 
 - Build docker image with "Build Image" command from the command palette.
 - Run or debug, python interpreter in the docker will be used automatically to execute the active file.
