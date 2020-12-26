@@ -3,11 +3,15 @@
 - Python
 - Docker
 - Jupyter
+- TensorFlow
+- TensorBoard
 - GPU Support
 
-## Starting Jupyter Lab
+## Starting Jupyter Lab and TensorBoard
 
-`$ _docker/docker-forever.sh [--jupyter_port=####|8888]`
+`$ _docker/docker-forever.sh [--jupyter_port=####|8888] [--tensorboard_port=####|6006]`
+
+TensorBoard log dir inside container is at `/app/.tensorboard`.
 
 ## Running Python App from VS Code
 

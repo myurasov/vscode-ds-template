@@ -21,6 +21,7 @@ RUN chmod +x /usr/bin/save-jupyter-config
 # startup commands
 ARG JUPYTER_TOKEN=myToken
 RUN echo "jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='${JUPYTER_TOKEN}' &" >> /cmd
+RUN echo "tensorboard --logdir=/app/.tensorboard --bind_all &" >> /cmd
 RUN echo "sleep infinity" >> /cmd
 CMD ["sh", "/cmd"]
 
