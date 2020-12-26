@@ -14,7 +14,7 @@ RUN pip install pandas numpy matplotlib seaborn
 RUN pip install jupyterlab
 
 # jupyter config saving
-RUN echo "cp -r /root/.jupyter /app/_docker/res/root/ && rm -rf /app/_docker/res/root/.jupyter/lab/workspaces && echo \"done\"" \
+RUN echo "cp -r /root/.jupyter /app/docker/res/root/ && rm -rf /app/docker/res/root/.jupyter/lab/workspaces && echo \"done\"" \
     >> /usr/bin/save-jupyter-config
 RUN chmod +x /usr/bin/save-jupyter-config
 
@@ -26,7 +26,7 @@ RUN echo "sleep infinity" >> /cmd
 CMD ["sh", "/cmd"]
 
 # copy resources
-COPY _docker/res /
+COPY docker/res /
 
 # cleanup
 RUN rm -rf /var/lib/apt/lists/*

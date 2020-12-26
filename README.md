@@ -9,7 +9,7 @@
 
 ## Starting Jupyter Lab and TensorBoard
 
-`$ _docker/docker-forever.sh [--jupyter_port=####|8888] [--tensorboard_port=####|6006]`
+`$ docker/docker-forever.sh [--jupyter_port=####|8888] [--tensorboard_port=####|6006]`
 
 ## Running Python from VS Code
 
@@ -19,4 +19,4 @@
 ## Misc
 
 - TensorBoard log dir inside container is at `/app/.tensorboard`.
-- Edit `JUPYTER_TOKEN` argument in `_docker/Dockerfile` to set Jupyter access token
+- Edit `JUPYTER_TOKEN` argument in `docker/Dockerfile` to set Jupyter access token
