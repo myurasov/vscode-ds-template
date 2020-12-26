@@ -27,7 +27,7 @@ done
 
 docker kill "${IMAGE_NAME}"
 
-docker build -f "${THIS_DIR}/Dockerfile" -t $IMAGE_NAME "${THIS_DIR}" && \
+docker build -f "${THIS_DIR}/Dockerfile" -t $IMAGE_NAME "${UP1_DIR}" && \
 docker run --gpus=all --rm ${_OPTIONS_:-'-it'} -p $JUPYTER_PORT:8888 \
 	-v "${UP1_DIR}:/app" --name="${IMAGE_NAME}" \
 	$IMAGE_NAME $CMD

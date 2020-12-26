@@ -24,8 +24,8 @@ RUN echo "jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token
 RUN echo "sleep infinity" >> /cmd
 CMD ["sh", "/cmd"]
 
-# copy config files
-COPY ./res /
+# copy resources
+COPY _docker/res /
 
 # cleanup
 RUN rm -rf /var/lib/apt/lists/*
