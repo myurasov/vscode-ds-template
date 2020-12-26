@@ -12,4 +12,4 @@
 ## Running Python App from VS Code
 
 - Build docker image with "Build Image" command from the command palette.
-- Start Debugging or run, python interpreter in the docker will be used automatically.
+- Run or debug, python interpreter in the docker will be used automatically to execute the active file.
