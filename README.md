@@ -2,7 +2,7 @@
 
 - Python
 - Docker
-- Jypyter
+- Jupyter
 - GPU Support
 
 ## Starting Jupyter Lab
