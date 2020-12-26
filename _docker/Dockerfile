@@ -19,8 +19,8 @@ RUN echo "cp -r /root/.jupyter /app/_docker/res/root/ && rm -rf /app/_docker/res
 RUN chmod +x /usr/bin/save-jupyter-config
 
 # startup commands
-ARG JYPYTER_TOKEN=myToken
-RUN echo "jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='${JYPYTER_TOKEN}' &" >> /cmd
+ARG JUPYTER_TOKEN=myToken
+RUN echo "jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='${JUPYTER_TOKEN}' &" >> /cmd
 RUN echo "sleep infinity" >> /cmd
 CMD ["sh", "/cmd"]
 
