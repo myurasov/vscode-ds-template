@@ -6,7 +6,7 @@
 			"label": "docker-build",
 			"platform": "python",
 			"dockerBuild": {
-				"dockerfile": "${workspaceFolder}/_docker/Dockerfile",
+				"dockerfile": "${workspaceFolder}/docker/Dockerfile",
 				"context": "${workspaceFolder}",
 				"pull": true
 			}
