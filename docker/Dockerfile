@@ -17,8 +17,9 @@ RUN pip install pandas numpy matplotlib seaborn
 RUN pip install jupyterlab==v3.0.0
 
 # jupyter config saving
-RUN echo "cp -r /root/.jupyter ${APP_DIR}/docker/res/root/ && rm -rf ${APP_DIR}/docker/res/root/.jupyter/lab/workspaces && echo \"done\"" \
-    >> /usr/bin/save-jupyter-config
+RUN echo "cp -r /root/.jupyter ${APP_DIR}/docker/res/root/ && \
+    rm -rf ${APP_DIR}/docker/res/root/.jupyter/lab/workspaces && echo \"done\"" \
+        >> /usr/bin/save-jupyter-config
 RUN chmod +x /usr/bin/save-jupyter-config
 
 # startup commands
