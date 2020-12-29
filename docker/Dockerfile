@@ -14,7 +14,7 @@ RUN pip install --upgrade pip
 RUN pip install pandas numpy matplotlib seaborn
 
 # jupyter
-RUN pip install jupyterlab
+RUN pip install jupyterlab==v3.0.0
 
 # jupyter config saving
 RUN echo "cp -r /root/.jupyter ${APP_DIR}/docker/res/root/ && rm -rf ${APP_DIR}/docker/res/root/.jupyter/lab/workspaces && echo \"done\"" \
