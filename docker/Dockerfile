@@ -7,6 +7,13 @@ ARG JUPYTER_TOKEN="myToken"
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+RUN apt-get update
+
+# node js (needed for jupyterlab_code_formatter)
+ENV TZ=America/Los_Angeles
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y nodejs npm
+
 # pip
 RUN pip install --upgrade pip
 
@@ -14,7 +21,13 @@ RUN pip install --upgrade pip
 RUN pip install pandas numpy matplotlib seaborn
 
 # jupyter
-RUN pip install jupyterlab==v3.0.0
+RUN pip install jupyterlab==v1.2.18
+
+# jupyterlab_code_formatter extension
+RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter
+RUN pip install jupyterlab_code_formatter
+RUN jupyter serverextension enable --py jupyterlab_code_formatter
+RUN pip install isort yapf
 
 # jupyter config saving
 RUN echo "cp -r /root/.jupyter ${APP_DIR}/docker/res/root/ && \
