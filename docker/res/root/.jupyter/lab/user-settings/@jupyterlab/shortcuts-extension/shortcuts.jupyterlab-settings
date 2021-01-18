@@ -7,7 +7,6 @@
             ],
             "selector": ".jp-Notebook"
         },
-        
         {
             "command": "jupyterlab_code_formatter:format_all",
             "keys": [
@@ -15,7 +14,6 @@
             ],
             "selector": "body"
         },
-    
         {
             "command": "jupyterlab_code_formatter:isort",
             "keys": [
@@ -23,6 +21,5 @@
             ],
             "selector": ".jp-Notebook"
         }
-    
     ]
 }
