@@ -18,7 +18,7 @@ RUN apt-get update
 ENV TZ=America/Los_Angles
 ENV DEBIAN_FRONTEND=noninteractive
 
-# node js (needed for jupyterlab_code_formatter)
+# node js (required by for jupyterlab_code_formatter and plotly)
 RUN apt-get install -y nodejs npm
 RUN npm install -g n && n lts
 
@@ -29,10 +29,19 @@ RUN pip install --upgrade pip
 RUN pip install jupyterlab==v3.0.5
 
 # jupyterlab_code_formatter extension
-RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter@v1.4.2
+RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter@v1.4.2 --no-build
 RUN pip install jupyterlab_code_formatter==v1.4.2
 RUN jupyter server extension enable --py jupyterlab_code_formatter
 RUN pip install isort yapf
+
+# plotly
+RUN pip install "ipywidgets>=7.5"
+RUN jupyter labextension install jupyterlab-plotly@4.14.3 --no-build
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.14.3 --no-build
+RUN pip install plotly==4.14.3
+
+# build jupyter lab assets
+RUN jupyter lab build
 
 # jupyter config saving
 RUN echo "cp -r /root/.jupyter ${APP_DIR}/docker/res/root/ && \
@@ -56,5 +65,8 @@ COPY docker/res /
 # cleanup
 RUN rm -rf /var/lib/apt/lists/*
 RUN rm -rf /tmp/*
+RUN jupyter lab clean
+RUN jlpm cache clean
+RUN npm cache clean --force
 
 WORKDIR ${APP_DIR}
