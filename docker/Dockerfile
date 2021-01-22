@@ -10,6 +10,10 @@ WORKDIR /tmp
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# use bash as a default shell
+ENV SHELL=/bin/bash
+ENV force_color_prompt=yes
+
 # path to app modules
 ENV PYTHONPATH=${APP_DIR}:${APP_DIR}/lib:${APP_DIR}/src
 
@@ -59,14 +63,14 @@ CMD ["sh", "/cmd"]
 # python packages
 RUN pip install numpy matplotlib pandas
 
-# copy external resources
-COPY docker/res /
-
 # cleanup
 RUN rm -rf /var/lib/apt/lists/*
 RUN rm -rf /tmp/*
 RUN jupyter lab clean
 RUN jlpm cache clean
 RUN npm cache clean --force
+
+# copy external resources
+COPY docker/res /
 
 WORKDIR ${APP_DIR}
