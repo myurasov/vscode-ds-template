@@ -24,4 +24,8 @@
 **/values.dev.yaml
 **/.tensorboard
 **/.keras
+**/_data
+**/.virtual_documents
+**/.ipynb_checkpoints
+**/__**
 README.md
