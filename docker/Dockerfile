@@ -70,7 +70,10 @@ RUN echo "sleep infinity" >> /cmd
 CMD ["sh", "/cmd"]
 
 # python packages
-RUN pip install numpy matplotlib pandas
+# python packages
+RUN pip install pandas
+RUN pip install numpy
+RUN pip install matplotlib
 
 # cleanup
 RUN rm -rf /var/lib/apt/lists/*
