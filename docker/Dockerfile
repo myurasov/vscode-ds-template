@@ -70,7 +70,6 @@ RUN echo "sleep infinity" >> /cmd
 CMD ["sh", "/cmd"]
 
 # python packages
-# python packages
 RUN pip install pandas
 RUN pip install numpy
 RUN pip install matplotlib
