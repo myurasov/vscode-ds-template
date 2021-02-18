@@ -77,4 +77,11 @@ RUN pip install matplotlib
 # copy external resources
 COPY docker/res /
 
+# cleanup
+# RUN rm -rf /var/lib/apt/lists/*
+# RUN rm -rf /tmp/*
+# RUN jupyter lab clean
+# RUN jlpm cache clean
+# RUN npm cache clean --force
+
 WORKDIR ${APP_DIR}
