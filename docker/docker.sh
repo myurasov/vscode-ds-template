@@ -64,6 +64,13 @@ if [ -z "$CMD" ]
     PORT_MAPPINGS_ARG="-p ${JUPYTER_PORT}:8888  -p ${TENSORBORAD_PORT}:6006"
 fi
 
+# only add --gpus switch if GPUs are present
+if [ `lspci | grep -i nvidia | wc -l` -ge 1 ]
+  then
+    GPUS_ARG="--gpus=\"${GPUS}\""
+fi
+
 docker run --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 \
+  ${GPUS_ARG} --rm "-${DOCKER_RUN_FLAGS}" --name="${IMAGE_NAME}" \
   -v "${UP1_DIR}:/app" $PORT_MAPPINGS_ARG \
   $IMAGE_NAME $CMD
