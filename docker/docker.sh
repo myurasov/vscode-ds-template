@@ -61,10 +61,9 @@ fi
 # only map jupyter/tensorboard ports if command is not specified
 if [ -z "$CMD" ]
   then
-    PORT_MAPPINGS="-p ${JUPYTER_PORT}:8888  -p ${TENSORBORAD_PORT}:6006"
+    PORT_MAPPINGS_ARG="-p ${JUPYTER_PORT}:8888  -p ${TENSORBORAD_PORT}:6006"
 fi
 
 docker run --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 \
-  --gpus="${GPUS}" --rm "-${DOCKER_RUN_FLAGS}" --name="${IMAGE_NAME}" \
-  -v "${UP1_DIR}:/app" $PORT_MAPPINGS \
+  -v "${UP1_DIR}:/app" $PORT_MAPPINGS_ARG \
   $IMAGE_NAME $CMD
