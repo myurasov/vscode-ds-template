@@ -75,13 +75,6 @@ RUN pip install pandas
 RUN pip install numpy
 RUN pip install matplotlib
 
-# cleanup
-RUN rm -rf /var/lib/apt/lists/*
-RUN rm -rf /tmp/*
-RUN jupyter lab clean
-RUN jlpm cache clean
-RUN npm cache clean --force
-
 # copy external resources
 COPY docker/res /
 
