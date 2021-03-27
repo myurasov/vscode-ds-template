@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/tensorflow:20.12-tf2-py3
+FROM nvcr.io/nvidia/tensorflow:21.02-tf2-py3
 
 # where external files are mapped to
 ARG APP_DIR="/app"
@@ -30,11 +30,11 @@ RUN npm install -g n && n lts
 RUN pip install --upgrade pip
 
 # jupyter lab
-RUN pip install jupyterlab==v3.0.5
+RUN pip install jupyterlab==v3.0.12
 
 # jupyterlab_code_formatter extension
-RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter@v1.4.2 --no-build
-RUN pip install jupyterlab_code_formatter==v1.4.2
+RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter@v1.4.5 --no-build
+RUN pip install jupyterlab_code_formatter==v1.4.5
 RUN jupyter server extension enable --py jupyterlab_code_formatter
 RUN pip install isort yapf black
 
