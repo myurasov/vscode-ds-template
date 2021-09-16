@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/tensorflow:21.03-tf2-py3
+FROM nvcr.io/nvidia/tensorflow:21.08-tf2-py3
 
 # where external files are mapped to
 ARG APP_DIR="/app"
@@ -30,7 +30,7 @@ RUN npm install -g n && n lts
 RUN pip install --upgrade pip
 
 # jupyter lab
-RUN pip install jupyterlab==v3.0.14
+RUN pip install jupyterlab==v3.1.12
 
 # jupyterlab_code_formatter extension
 RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter@v1.4.10 --no-build
