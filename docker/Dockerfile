@@ -56,12 +56,6 @@ RUN pip install python-language-server[all]
 # build jupyter lab assets
 RUN jupyter lab build
 
-# jupyter config saving
-RUN echo "cp -r /root/.jupyter ${APP_DIR}/docker/res/root/ && \
-    rm -rf ${APP_DIR}/docker/res/root/.jupyter/lab/workspaces && echo \"done\"" \
-    >> /usr/bin/save-jupyter-config
-RUN chmod +x /usr/bin/save-jupyter-config
-
 # startup commands
 ARG JUPYTER_TOKEN="mytoken"
 RUN echo "tensorboard --logdir=${APP_DIR}/.tensorboard --bind_all &" >> /cmd
@@ -76,6 +70,7 @@ RUN pip install matplotlib
 
 # copy external resources
 COPY docker/res /
+ENV PATH="/opt:${PATH}"
 
 # cleanup
 # RUN rm -rf /var/lib/apt/lists/*
