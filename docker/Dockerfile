@@ -68,9 +68,9 @@ RUN pip install pandas
 RUN pip install numpy
 RUN pip install matplotlib
 
-# copy external resources
-COPY docker/res /
+# copy external resources and tools
 ENV PATH="/opt:${PATH}"
+COPY docker/res /
 
 # cleanup
 # RUN rm -rf /var/lib/apt/lists/*
