@@ -29,11 +29,6 @@
     "**/.tensorboard/": true,
     "**/.keras/": true,
     "**/.virtual_documents/": true,
-    "**/_data/": true,
-    "**/_out/": true,
-    "**/__*/": true,
-    "**/__*.*": true,
-    "**/kaggle.json": true,
     "docker/res/root/.jupyter/migrated": true
   }
 }
