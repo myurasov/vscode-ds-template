@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/tensorflow:21.08-tf2-py3
+FROM nvcr.io/nvidia/tensorflow:22.12-tf2-py3
 
 # where external files are mapped to
 ARG APP_DIR="/app"
@@ -30,11 +30,11 @@ RUN npm install -g n && n lts
 RUN pip install --upgrade pip
 
 # jupyter lab
-RUN pip install jupyterlab==v3.1.12
+RUN pip install jupyterlab==v3.5.0
 
 # jupyterlab_code_formatter extension
-RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter@v1.4.10 --no-build
-RUN pip install jupyterlab_code_formatter==v1.4.10
+RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter@v1.5.3 --no-build
+RUN pip install jupyterlab_code_formatter
 RUN jupyter server extension enable --py jupyterlab_code_formatter
 RUN pip install isort yapf black
 
@@ -59,7 +59,7 @@ RUN jupyter lab build
 # startup commands
 ARG JUPYTER_TOKEN="mytoken"
 RUN echo "tensorboard --logdir=${APP_DIR}/.tensorboard --bind_all &" >> /cmd
-RUN echo "jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='${JUPYTER_TOKEN}' &" >> /cmd
+RUN echo "jupyter lab --ServerApp.ip=0.0.0.0 --ServerApp.allow_root=true --no-browser --IdentityProvider.token='${JUPYTER_TOKEN}' &" >> /cmd
 RUN echo "sleep infinity" >> /cmd
 CMD ["sh", "/cmd"]
 
