@@ -3,22 +3,23 @@
 UP1_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. >/dev/null && pwd)"
 THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 IMAGE_NAME=`cd "${UP1_DIR}" && echo ${PWD##*/} | tr '[:upper:]' '[:lower:]' | sed -e 's/[-_ ]+/-/g'`
+
+KILL=1
+CMD=""
+BUILD=1
+FOREVER=0
+GPUS="all"
 JUPYTER_PORT=8888
 TENSORBORAD_PORT=6006
 DOCKER_RUN_FLAGS="it"
-GPUS="all"
-FOREVER=0
-BUILD=1
-KILL=1
-CMD=""
 
 # process named arguments
 while [ $# -gt 0 ]; do
   case "$1" in
-    --jupyter_port=*)
+    --jupyter_port=*|--jp=*)
       JUPYTER_PORT="${1#*=}"
       ;;
-    --tensorboard_port=*)
+    --tensorboard_port=*|--tp=*)
       TENSORBORAD_PORT="${1#*=}"
       ;;
     --image_suffix=*)
@@ -27,7 +28,7 @@ while [ $# -gt 0 ]; do
     --gpus=*)
       GPUS="${1#*=}"
       ;;
-    --forever)
+    --forever|-f)
       DOCKER_RUN_FLAGS+="d"
       ;;
     --no-kill)
@@ -36,8 +37,8 @@ while [ $# -gt 0 ]; do
     --no-build)
       BUILD=0
       ;;
-    --help)
-      echo "Usage: docker.sh [--jupyter_port=####|8888] [--tensorboard_port=####|6006] [--help] [command]"
+    --help|-h)
+      echo "Usage: docker.sh [--jupyter_port=####|8888] [--tensorboard_port=####|6006] [--help] [CMD]"
       exit
       ;;
     *)
@@ -49,7 +50,7 @@ done
 if [ $KILL -ge 1 ]
   then
     echo "Killing ${IMAGE_NAME}..."
-    docker kill "${IMAGE_NAME}"
+    docker kill "${IMAGE_NAME}" 2>/dev/null
 fi
 
 if [ $BUILD -ge 1 ]
@@ -71,6 +72,10 @@ if [ `uname` != 'Darwin' ] && [ `lspci | grep -i nvidia | wc -l` -ge 1 ]
 fi
 
 docker run --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 \
-  ${GPUS_ARG} --rm "-${DOCKER_RUN_FLAGS}" --name="${IMAGE_NAME}" \
-  -v "${UP1_DIR}:/app" $PORT_MAPPINGS_ARG \
-  $IMAGE_NAME $CMD
+  --rm "-${DOCKER_RUN_FLAGS}" \
+  -v "${UP1_DIR}:/app" \
+  --name="${IMAGE_NAME}" \
+  $PORT_MAPPINGS_ARG \
+  ${GPUS_ARG} \
+  $IMAGE_NAME \
+  $CMD
