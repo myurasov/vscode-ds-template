@@ -65,7 +65,7 @@ if [ -z "$CMD" ]
 fi
 
 # only add --gpus switch if GPUs are present
-if [ `lspci | grep -i nvidia | wc -l` -ge 1 ]
+if [ `uname` != 'Darwin' ] && [ `lspci | grep -i nvidia | wc -l` -ge 1 ]
   then
     GPUS_ARG="--gpus=\"${GPUS}\""
 fi
